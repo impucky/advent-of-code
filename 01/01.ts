@@ -1,10 +1,7 @@
-const fs = require("node:fs");
+const left: number[] = [];
+const right: number[] = [];
 
-const left = [];
-const right = [];
-
-fs.readFileSync("01/input.txt")
-  .toString()
+Deno.readTextFileSync("01/input.txt")
   .split("\n")
   .forEach((line) => {
     left.push(parseInt(line.split("   ")[0]));
@@ -13,8 +10,8 @@ fs.readFileSync("01/input.txt")
 
 function partOne() {
   let total = 0;
-  let ls = left.sort();
-  let rs = right.sort();
+  const ls = left.sort();
+  const rs = right.sort();
 
   for (let i = 0; i < ls.length; i++) {
     total += Math.abs(ls[i] - rs[i]);
