@@ -23,21 +23,5 @@ function isKindaSafe(report: number[]) {
   return false;
 }
 
-function partOne() {
-  let total = 0;
-  reports.forEach((report) => {
-    if (isSafe(report)) total++;
-  });
-  console.log(total);
-}
-
-function partTwo() {
-  let total = 0;
-  reports.forEach((report) => {
-    if (isKindaSafe(report)) total++;
-  });
-  console.log(total);
-}
-
-partOne();
-partTwo();
+console.log(reports.filter(isSafe).length);
+console.log(reports.filter(isKindaSafe).length);
