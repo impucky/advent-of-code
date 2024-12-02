@@ -34,8 +34,7 @@ function partOne() {
 function partTwo() {
   let total = 0;
   reports.forEach((report) => {
-    if (isSafe(report)) total++;
-    else if (isKindaSafe(report)) total++;
+    if (isKindaSafe(report)) total++;
   });
   console.log(total);
 }
