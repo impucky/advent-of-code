@@ -10,8 +10,7 @@ function isSafe(report: number[]) {
     const curr = report[i];
     const next = report[i + 1];
     const step = Math.abs(curr - next);
-    if (next < curr || next === curr) return false;
-    if (step > 3) return false;
+    if (next < curr || next === curr || step > 3) return false;
   }
   return true;
 }
