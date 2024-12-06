@@ -16,7 +16,6 @@ const directions = {
 const turns = ["UP", "RIGHT", "DOWN", "LEFT"];
 
 type DirKey = keyof typeof directions;
-type vec2 = [number, number];
 
 function turnRight(current: DirKey): DirKey {
   const index = turns.indexOf(current);
