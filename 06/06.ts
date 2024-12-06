@@ -16,6 +16,7 @@ const directions = {
 const turns = ["UP", "RIGHT", "DOWN", "LEFT"];
 
 type DirKey = keyof typeof directions;
+type vec2 = [number, number];
 
 function turnRight(current: DirKey): DirKey {
   const index = turns.indexOf(current);
@@ -28,37 +29,12 @@ function step(start: number[], direction: DirKey) {
   return [x + dx, y + dy];
 }
 
-function countVisited(start: number[], map: string[][]): number {
-  let total = 1;
-  let direction: DirKey = "UP";
-  let [x, y] = start;
-  let [nextX, nextY] = step([x, y], direction);
-  while (
-    nextX >= 0 &&
-    nextX < map[0].length &&
-    nextY >= 0 &&
-    nextY < map.length
-  ) {
-    // Turn
-    if (map[nextY][nextX] === "#") {
-      direction = turnRight(direction);
-    } else {
-      [x, y] = [nextX, nextY];
-      // Mark visited
-      if (map[y][x] === ".") {
-        total++;
-        map[y][x] = "X";
-      }
-    }
-    [nextX, nextY] = step([x, y], direction);
-  }
-  return total;
-}
-
-function mapHasLoop(start: number[], map: string[][]) {
+// Walk through map and record path
+function walk(partOne: boolean): boolean | Set<string> {
+  let [x, y] = startingCoords;
   const visited = new Set<string>();
+  const states = new Set<string>();
   let direction: DirKey = "UP";
-  let [x, y] = start;
   let [nextX, nextY] = step([x, y], direction);
   while (
     nextX >= 0 &&
@@ -66,46 +42,47 @@ function mapHasLoop(start: number[], map: string[][]) {
     nextY >= 0 &&
     nextY < map.length
   ) {
-    // Check for loops
-    const state = `${x}:${y}:${direction}`;
-    if (visited.has(state)) {
-      return true;
+    // Check for loops on part two
+    if (!partOne) {
+      const state = `${x}:${y}:${direction}`;
+      if (states.has(state)) {
+        return true;
+      }
+      states.add(state);
     }
-    visited.add(state);
     // Turn
     if (map[nextY][nextX] === "#") {
       direction = turnRight(direction);
     } else {
       [x, y] = [nextX, nextY];
-      // Mark visited
     }
+    // Mark path on part one
+    if (partOne) visited.add(`${x}:${y}`);
     [nextX, nextY] = step([x, y], direction);
   }
-  return false;
+  return partOne ? visited : false;
 }
 
 function countLoops() {
   let total = 0;
-  for (let y = 0; y < map.length; y++) {
-    for (let x = 0; x < map[0].length; x++) {
-      if (map[y][x] === ".") {
-        map[y][x] = "#";
-        if (mapHasLoop(startingCoords, map)) total++;
-        map[y][x] = ".";
-      }
+  for (const coords of visited) {
+    const [x, y] = coords.split(":").map((n) => parseInt(n));
+    if (map[y][x] === ".") {
+      map[y][x] = "#";
+      if (walk(false)) total++;
+      map[y][x] = ".";
     }
   }
   return total;
 }
 
-// Part 1
-console.log(
-  "Part one:",
-  countVisited(startingCoords, JSON.parse(JSON.stringify(map)))
-);
+const visited = walk(true) as Set<string>;
+
+// Part 1 (+1 for starting point)
+console.log("Part one:", visited.size + 1);
 // Part 2
 console.log("Part two:", countLoops());
 
-// Yep, pretty slow 💩
+// Quite a bit faster! 💩
 const end = performance.now();
 console.log(`💩Finished in ${(end - start).toFixed(0)}ms💩`);
