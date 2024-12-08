@@ -29,15 +29,20 @@ antennas.forEach((freq) => {
     for (let j = i + 1; j < freq.length; j++) {
       const [a1x, a1y] = freq[i];
       const [a2x, a2y] = freq[j];
+      // In part two every antenna is also an antinode unless there's only one of its kind
+      antinodesP2.add(`${a1x}:${a1y}`);
+      antinodesP2.add(`${a2x}:${a2y}`);
       const [dx, dy] = [a2x - a1x, a2y - a1y];
       let [n1x, n1y] = [a1x - dx, a1y - dy];
       let [n2x, n2y] = [a2x + dx, a2y + dy];
+      // Part 1
       if (inBounds(n1x, n1y)) {
         antinodesP1.add(`${n1x}:${n1y}`);
       }
       if (inBounds(n2x, n2y)) {
         antinodesP1.add(`${n2x}:${n2y}`);
       }
+      // Part 2
       while (inBounds(n1x, n1y)) {
         antinodesP2.add(`${n1x}:${n1y}`);
         [n1x, n1y] = [n1x - dx, n1y - dy];
@@ -47,12 +52,6 @@ antennas.forEach((freq) => {
         [n2x, n2y] = [n2x + dx, n2y + dy];
       }
     }
-  }
-  // Every antenna is also an antinode unless there's only one of its kind
-  if (freq.length > 1) {
-    freq.forEach(([x, y]) => {
-      antinodesP2.add(`${x}:${y}`);
-    });
   }
 });
 
