@@ -13,4 +13,4 @@ console.log(
 
 console.log("Part two:", p2);
 
-console.log(`\nFinished in ${(performance.now() - start).toFixed(0)}ms`);
+console.log(`\↗Finished in ${(performance.now() - start).toFixed(0)}ms↘`);

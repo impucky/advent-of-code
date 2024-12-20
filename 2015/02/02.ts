@@ -20,4 +20,4 @@ console.log(
   input.map(wrap).reduce((a, b) => a + b[1], 0)
 );
 
-console.log(`\nFinished in ${(performance.now() - start).toFixed(0)}ms`);
+console.log(`\n🎁Finished in ${(performance.now() - start).toFixed(0)}ms🎁`);
