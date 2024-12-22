@@ -3,8 +3,7 @@ const [year, day] = [Deno.args[0], Deno.args[1]];
 
 if (!year || !day) Deno.exit();
 
-const content = `
-const start = performance.now();
+const content = `const start = performance.now();
 const input = Deno.readTextFileSync("${year}/${day}/input.txt").split("\\n");
 
 console.log("Part one:");

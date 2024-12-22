@@ -1,5 +1,8 @@
 {
   "tasks": {
     "make": "deno run -A scripts/make.ts"
+  },
+  "imports": {
+    "@takker/md5": "jsr:@takker/md5@^0.1.0"
   }
 }

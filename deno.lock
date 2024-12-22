@@ -1,5 +1,17 @@
 {
   "version": "4",
+  "specifiers": {
+    "jsr:@std/encoding@1": "1.0.6",
+    "jsr:@takker/md5@0.1": "0.1.0"
+  },
+  "jsr": {
+    "@std/encoding@1.0.6": {
+      "integrity": "ca87122c196e8831737d9547acf001766618e78cd8c33920776c7f5885546069"
+    },
+    "@takker/md5@0.1.0": {
+      "integrity": "4c423d8247aadf7bcb1eb83c727bf28c05c21906e916517395d00aa157b6eae0"
+    }
+  },
   "redirects": {
     "https://deno.land/x/is_docker/mod.ts": "https://deno.land/x/is_docker@v2.0.0/mod.ts"
   },
@@ -14,5 +26,10 @@
     "https://deno.land/x/is_docker@v2.0.0/mod.ts": "4c8753346f4afbb6c251d7984a609aa84055559cf713fba828939a5d39c95cd0",
     "https://deno.land/x/is_wsl@v1.1.0/mod.ts": "30996b09376652df7a4d495320e918154906ab94325745c1399e13e658dca5da",
     "https://deno.land/x/open@v1.0.0/index.ts": "bb328bed0d9660ccc747fb7e8fc8f85b9c0102b09a56aceb486321837d33af23"
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@takker/md5@0.1"
+    ]
   }
 }
