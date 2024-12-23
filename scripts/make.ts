@@ -1,4 +1,5 @@
 import { open } from "https://deno.land/x/open@v1.0.0/index.ts";
+import { writeText } from "https://deno.land/x/copy_paste/mod.ts";
 const [year, day] = [Deno.args[0], Deno.args[1]];
 
 if (!year || !day) Deno.exit();
@@ -13,6 +14,10 @@ console.log(\`\\nFinished in \${(performance.now() - start).toFixed(0)}ms\`);
 `;
 
 try {
+  await writeText(`deno -A ${year}/${day}/${day}.ts`);
+  await new Deno.Command("code", {
+    args: ["."],
+  }).output();
   const _stat = await Deno.lstat(year);
 } catch (_error) {
   Deno.mkdir(year);
