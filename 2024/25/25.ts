@@ -1,13 +1,12 @@
-const start = performance.now();
-const [keys, locks]: [string[][], string[][]] = [[], []];
-const input = Deno.readTextFileSync("2024/25/input.txt")
+const [keys, locks]: [number[][], number[][]] = [[], []];
+Deno.readTextFileSync("2024/25/input.txt")
   .split("\r\n\r\n")
   .map((rows) => rows.split("\r\n"))
   .forEach((schematic) => {
     if (schematic[0][0] === "#") {
-      keys.push(schematic);
+      keys.push(countHeights(schematic));
     } else {
-      locks.push(schematic);
+      locks.push(countHeights(schematic));
     }
   });
 
@@ -23,13 +22,10 @@ function countHeights(schematic: string[]) {
   );
 }
 
-const kh = keys.map(countHeights);
-const lh = locks.map(countHeights);
-
 let partOne = 0;
 
-lh.forEach((lock) => {
-  kh.forEach((key) => {
+locks.forEach((lock) => {
+  keys.forEach((key) => {
     for (let i = 0; i < 5; i++) {
       if (lock[i] + key[i] > 7) return;
     }
@@ -38,6 +34,5 @@ lh.forEach((lock) => {
 });
 
 console.log("Part one:", partOne);
-console.log("Part two:");
 
-console.log(`\nFinished in ${(performance.now() - start).toFixed(0)}ms`);
+console.log(`\n🌟Finished in 25 days🌟`);
