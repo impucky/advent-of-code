@@ -10,13 +10,8 @@ input.forEach(range => {
   const [start, end] = range;
   for (let i = +start; i <= +end; i++) {
     const str = i.toString();
-    const len = str.length;
-    if (/^(\d+)\1+$/.test(str)) {
-      if (len % 2 === 0 && str.slice(0, len / 2) === str.slice(len / 2)) {
-        part1 += i;
-      }
-      part2 += i;
-    }
+    if (/^(\d+)\1$/.test(str)) part1 += i;
+    if (/^(\d+)\1+$/.test(str)) part2 += i;
   }
 });
 
