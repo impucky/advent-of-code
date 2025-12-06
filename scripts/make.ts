@@ -5,7 +5,7 @@ const [year, day] = [Deno.args[0], Deno.args[1]];
 if (!year || !day) Deno.exit();
 
 const content = `const start = performance.now();
-const input = Deno.readTextFileSync("${year}/${day}/input.txt").split("\\n");
+const input = Deno.readTextFileSync("${year}/${day}/example.txt").split("\\n");
 
 console.log("Part one:");
 console.log("Part two:");
@@ -26,9 +26,6 @@ try {
 Deno.mkdir(`${year}/${day}`);
 Deno.writeTextFileSync(`${year}/${day}/input.txt`, "");
 Deno.writeTextFileSync(`${year}/${day}/example.txt`, "");
-Deno.writeFileSync(
-  `${year}/${day}/${day}.ts`,
-  new TextEncoder().encode(content)
-);
+Deno.writeFileSync(`${year}/${day}/${day}.ts`, new TextEncoder().encode(content));
 
 open(`https://adventofcode.com/${year}/day/${day.replace("0", "")}`);
